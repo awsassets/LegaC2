@@ -76,7 +76,7 @@ class Register(Resource):
         
         # Check if user already exists in the database.
         # If so, then just return.
-        if (UserModel.query.filter_by(username=username).first() is None):
+        if (not UserModel.query.filter_by(username=username).first() is None):
             return "Username already exists"
 
         # Hash the password
