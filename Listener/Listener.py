@@ -54,13 +54,11 @@ class Login(Resource):
         userRecord = UserModel.query.filter_by(username=username).first()
         if userRecord is None:
             return "Invalid username"
-        else:
-            username = userRecord.username
         
         hashedPassword = sha512("{}LegaC2{}".format(username, password).encode()).digest()
 
-        if hashedPassword == UserModel.query.get(username=username).password:
-            return "Successfull login"
+        if hashedPassword == UserModel.query.filter_by(username=username).first().password:
+            return "Successful login"
         
         return "Invalid username"
 
